@@ -1,33 +1,10 @@
 const express = require("express");
-const authorize = require("./authorize");
-const morgan = require("morgan");
 const app = express();
 
-const logger = (req, res, next) => {
-  const method = req.method;
-  const url = req.url;
-  const time = new Date().getFullYear();
-  console.log(method, url, time);
-  next();
-};
+app.use(express.static("./methods-public"));
 
-// app.use([logger, authorize]);
-app.use(morgan("tiny"))
-
-app.get("/", (req, res) => {
-  res.send("Home Page");
-});
-
-app.get("/about", (req, res) => {
-  res.send("About Page");
-});
-
-app.get("/api/products", (req, res) => {
-  res.send("Products");
-});
-
-app.get("/api/items", (req, res) => {
-  res.send("Items");
+app.get("/api/people/", (req, res) => {
+  res.status(200).json({ success: true, data: [] });
 });
 
 app.listen(5000, () => {
