@@ -1,12 +1,8 @@
 const express = require("express");
-const path = require("path");
-
 const app = express();
-
-app.use(express.static("./public"));
-
-app.all("*", (req, res) => {
-  res.status(404).send("<h1>Resource not found</h1>");
+const { products } = require("./data");
+app.get("/", (req, res) => {
+  res.json(products);
 });
 
 app.listen(5000, () => {
