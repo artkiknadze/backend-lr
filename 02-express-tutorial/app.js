@@ -1,4 +1,5 @@
 const express = require("express");
+const authorize = require("./authorize");
 const app = express();
 
 const logger = (req, res, next) => {
@@ -9,7 +10,7 @@ const logger = (req, res, next) => {
   next();
 };
 
-app.use("/api", logger);
+app.use([logger, authorize]);
 
 app.get("/", (req, res) => {
   res.send("Home Page");
